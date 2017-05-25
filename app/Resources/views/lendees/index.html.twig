@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<ul>
+    {% for  key, item in characters %}
+        <li>{{ key }} - {{ item }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
+{% block stylesheets %}
+
+{% endblock %}
