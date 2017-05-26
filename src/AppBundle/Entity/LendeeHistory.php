@@ -36,10 +36,15 @@ class LendeeHistory {
   /**
    * @ORM\OneToMany(targetEntity="HistoryNote", mappedBy="lendeeHistory")
    */
-  private $historyNote;
+  private $historyNotes;
+  /**
+   * @ORM\ManyToOne(targetEntity="Lender", inversedBy="id")
+   * @ORM\JoinColumn(name="lender_id", referencedColumnName="id", nullable=FALSE)
+   */
+  private $Lender;
 
   public function __construct() {
-    $this->historyNote = new ArrayCollection();
+    $this->historyNotes = new ArrayCollection();
   }
 
   /**
@@ -81,6 +86,20 @@ class LendeeHistory {
   /**
    * @return mixed
    */
+  public function getLender() {
+    return $this->Lender;
+  }
+
+  /**
+   * @param mixed $Lender
+   */
+  public function setLender(Lender $Lender) {
+    $this->Lender = $Lender;
+  }
+
+  /**
+   * @return mixed
+   */
   public function getLoanStatusId() {
     return $this->loanStatusId;
   }
@@ -109,21 +128,19 @@ class LendeeHistory {
   /**
    * @return mixed
    */
-  public function getHistoryNote() {
-    return $this->historyNote;
+  public function getHistoryNotes() {
+    return $this->historyNotes;
   }
 
   /**
-   * @param mixed $historyNote
+   * @param mixed $historyNotes
    */
-  public function setHistoryNote(HistoryNote $historyNote) {
-    $this->historyNote->add($historyNote);
+  public function setHistoryNotes(HistoryNote $historyNotes) {
+    $this->historyNotes->add($historyNotes);
   }
 
-  public function getHistoryNotes(){
-    return $this->historyNote->toArray();
-  }
-  public function addHistoryNotes(HistoryNote $historyNote){
-    $this->historyNote->add($historyNote);
+  public function addHistoryNotes(HistoryNote $historyNotes){
+    //$this->historyNote->add($historyNote);
+    $this->historyNotes[] = $historyNotes;
   }
 }

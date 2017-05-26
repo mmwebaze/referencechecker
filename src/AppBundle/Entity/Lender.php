@@ -20,6 +20,24 @@ class Lender {
    * @ORM\Column(type="string", length=40)
    */
   private $name;
+  /**
+   * @ORM\OneToMany(targetEntity="LendeeHistory", mappedBy="Lender")
+   */
+  private $LendeeHistory;
+
+  /**
+   * @return mixed
+   */
+  public function getLendeeHistory() {
+    return $this->LendeeHistory;
+  }
+
+  /**
+   * @param mixed $LendeeHistroy
+   */
+  public function setLendeeHistroy($LendeeHistory) {
+    $this->LendeeHistory = LendeeHistory;
+  }
 
   /**
    * @return mixed

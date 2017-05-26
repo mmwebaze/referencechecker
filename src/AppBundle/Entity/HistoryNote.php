@@ -20,7 +20,7 @@ class HistoryNote {
   private $note;
   /**
    *
-   * @ORM\ManyToOne(targetEntity="LendeeHistory", inversedBy="historyNote")
+   * @ORM\ManyToOne(targetEntity="LendeeHistory", inversedBy="historyNotes")
    * @ORM\JoinColumn(name="Lendee_history_id", referencedColumnName="id", nullable=FALSE)
    */
   private $lendeeHistory;
