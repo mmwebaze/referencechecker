@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity
  */
@@ -13,25 +14,33 @@ class LendeeHistory {
    * @ORM\Column(type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected $id;
+  private $id;
   /**
    * @ORM\Column(type="integer")
    */
-  protected $loanStatusId;
+  private $loanStatusId;
   /**
    *
    * @ORM\ManyToOne(targetEntity="Lendee", inversedBy="id")
-   * @ORM\JoinColumn(onDelete="CASCADE")
+   * @ORM\JoinColumn(name="lendee_id", referencedColumnName="id", onDelete="CASCADE")
    */
-  protected $Lendee;
+  private $Lendee;
   /**
    * @ORM\Column(type="decimal",  precision=10, scale=2)
    */
-  protected $outstandingAmount;
+  private $outstandingAmount;
   /**
    * @ORM\Column(type="date")
    */
-  protected $lastPaymentDate;
+  private $lastPaymentDate;
+  /**
+   * @ORM\OneToMany(targetEntity="HistoryNote", mappedBy="lendeeHistory")
+   */
+  private $historyNote;
+
+  public function __construct() {
+    $this->historyNote = new ArrayCollection();
+  }
 
   /**
    * @return mixed
@@ -94,7 +103,27 @@ class LendeeHistory {
    * @param mixed $lastPaymentDate
    */
   public function setLastPaymentDate($lastPaymentDate) {
-    $this->lastPaymentDate = $lastPaymentDate;
+    $this->lastPaymentDate = new \DateTime($lastPaymentDate);
   }
 
+  /**
+   * @return mixed
+   */
+  public function getHistoryNote() {
+    return $this->historyNote;
+  }
+
+  /**
+   * @param mixed $historyNote
+   */
+  public function setHistoryNote(HistoryNote $historyNote) {
+    $this->historyNote->add($historyNote);
+  }
+
+  public function getHistoryNotes(){
+    return $this->historyNote->toArray();
+  }
+  public function addHistoryNotes(HistoryNote $historyNote){
+    $this->historyNote->add($historyNote);
+  }
 }
