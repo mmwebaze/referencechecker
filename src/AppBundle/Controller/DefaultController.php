@@ -13,6 +13,9 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+      $cacheDriver = new \Doctrine\Common\Cache\ArrayCache();
+      $deleted = $cacheDriver->deleteAll();
+      $deleted = apc_clear_cache() && apc_clear_cache('user');
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
