@@ -38,11 +38,13 @@ class LenderController extends FOSRestController{
     return $lenders;
   }
   /**
-   * @Rest\Get("/api/demo/lender", name="demo_lender")
+   * @Rest\Post("/api/lender", name="lender_post")
    */
-  public function lenderDemoAction(){
+  public function lenderDemoAction(Request $request){
+    $data = json_decode($request->getContent(), true);
     $lender = new Lender();
-    $lender->setName('Bank of Africa');
+    $lender->setName($data['lenderName']);
+    $lender->setBankCode($data['bankCode']);
     $em = $this->getDoctrine()->getManager();
     $em->persist($lender);
     $em->flush();

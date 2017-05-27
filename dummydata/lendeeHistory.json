@@ -1,0 +1,10 @@
+{
+  "loanStatus": "200",
+  "lendeeId": "1",
+  "outstandingAmount": "50000",
+  "lastPaymentDate": "2017-05-24",
+  "lenderId":"1",
+  "historyNote": [
+    "In the process of recovering loans with ids now. Come on pay up"
+  ]
+}

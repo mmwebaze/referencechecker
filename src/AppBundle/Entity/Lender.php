@@ -24,6 +24,24 @@ class Lender {
    * @ORM\OneToMany(targetEntity="LendeeHistory", mappedBy="Lender")
    */
   private $LendeeHistory;
+  /**
+   *  @ORM\Column(type="string", length=15, unique=true, nullable=FALSE)
+   */
+  private $bankCode;
+
+  /**
+   * @return mixed
+   */
+  public function getBankCode() {
+    return $this->bankCode;
+  }
+
+  /**
+   * @param mixed $bankCode
+   */
+  public function setBankCode($bankCode) {
+    $this->bankCode = $bankCode;
+  }
 
   /**
    * @return mixed
