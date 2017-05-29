@@ -11,10 +11,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LendeeController extends FOSRestController {
   /**
-   * @Rest\Get("/api/lendees", name="lendees_get")
+   * @Rest\Post("/api/lendees", name="lendees_get")
    */
-  public function lendeesAction()
+  public function lendeesAction(Request $request)
   {
+    dump($request->getContent());
     $lendees = $this->getDoctrine()->getRepository('AppBundle:Lendee')->findAll();
 
     if ($lendees === null){

@@ -27,17 +27,18 @@ class AuthenticationController extends FOSRestController{
       throw $this->createNotFoundException();
     }
     $secret = $this->get('security.password_encoder')->encodePassword($user, $password);
-
+    //dump($password);
     //$passwordIsValid = $this->get('security.password_encoder')->isPasswordValid($user, $password);
     // password check
     if(!$this->get('security.password_encoder')->isPasswordValid($user, $password)) {
       throw $this->createAccessDeniedException();
     }
-    //dump($passwordIsValid);
+
 
 
     $token = $this->get('lexik_jwt_authentication.encoder')
-      ->encode(['username' => $user->getUsername()]);
+      ->encode(['username' => $user->getUsername(),
+        'exp' => time() + 3600 ]);
 
     //return new View("Authentication valid ".$username.' password '.$password.' salt'.$user->getSalt(), Response::HTTP_OK);
     return ['token' => $token];

@@ -116,7 +116,8 @@ class AppUser implements UserInterface {
   }
 
   public function getRoles() {
-    // TODO: Implement getRoles() method.
+
+    return ['ROLE_USER', 'ROLE_API_USER']; //should be changed to pull user defined rolls. This is temp
   }
 
   public function eraseCredentials() {
