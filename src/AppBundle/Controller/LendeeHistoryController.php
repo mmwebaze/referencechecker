@@ -57,6 +57,7 @@ class LendeeHistoryController  extends FOSRestController {
     $lendeeHistory->setLoanStatusId($data['loanStatus']);
     $lendeeHistory->setOutstandingAmount($data['outstandingAmount']* rand(10,100));
     $lendeeHistory->setLastPaymentDate($data['lastPaymentDate']);
+    $lendeeHistory->setLoanDateObtainment($data['loanDateObtainment']);
     $lendeeHistory->setLender($lender);
 
     $historyNote = new HistoryNote();

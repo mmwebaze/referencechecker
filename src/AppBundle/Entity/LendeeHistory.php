@@ -42,6 +42,10 @@ class LendeeHistory {
    * @ORM\JoinColumn(name="lender_id", referencedColumnName="id", nullable=FALSE)
    */
   private $Lender;
+  /**
+   * @ORM\Column(type="date")
+   */
+  private $loanDateObtainment;
 
   public function __construct() {
     $this->historyNotes = new ArrayCollection();
@@ -142,5 +146,19 @@ class LendeeHistory {
   public function addHistoryNotes(HistoryNote $historyNotes){
     //$this->historyNote->add($historyNote);
     $this->historyNotes[] = $historyNotes;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getLoanDateObtainment() {
+    return $this->loanDateObtainment;
+  }
+
+  /**
+   * @param mixed $loanDateObtainment
+   */
+  public function setLoanDateObtainment($loanDateObtainment) {
+    $this->loanDateObtainment = new \DateTime($loanDateObtainment);
   }
 }

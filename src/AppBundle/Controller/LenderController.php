@@ -17,6 +17,7 @@ class LenderController extends FOSRestController{
    * @Rest\Get("/api/lenders", name="lenders")
    */
   public function lendersAction(){
+    //$this->denyAccessUnlessGranted('ROLE_USER');
     $lenders = $this->getDoctrine()->getRepository('AppBundle:Lender')->findAll();
 
     if ($lenders === null){
@@ -40,7 +41,7 @@ class LenderController extends FOSRestController{
   /**
    * @Rest\Post("/api/lender", name="lender_post")
    */
-  public function lenderDemoAction(Request $request){
+  public function addLenderAction(Request $request){
     $data = json_decode($request->getContent(), true);
     $lender = new Lender();
     $lender->setName($data['lenderName']);
@@ -49,6 +50,6 @@ class LenderController extends FOSRestController{
     $em->persist($lender);
     $em->flush();
 
-    return new View('Lender dummy data generated', Response::HTTP_OK);
+    return new View('Lender has been added', Response::HTTP_OK);
   }
 }

@@ -2,13 +2,15 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity
+ * ORM\@Table(name="users")
  * @UniqueEntity(fields={"username", "email"})
  */
-class User{
+class AppUser implements UserInterface {
   /**
    * @ORM\Id;
    * @ORM\Column(type="integer")
@@ -28,9 +30,41 @@ class User{
    */
   protected $roleId;
   /**
-   * @ORM\Column(type="string", length=64)
+   * @ORM\Column(type="string", length=255)
    */
   protected $password;
+  /**
+   * @ORM\Column(type="string", length=255, nullable=true)
+   */
+  protected $salt;
+
+  /**
+   * @return mixed
+   */
+  public function getSalt() {
+    return $this->salt;
+  }
+
+  /**
+   * @param mixed $salt
+   */
+  public function setSalt($salt) {
+    $this->salt = $salt;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getRoleId() {
+    return $this->roleId;
+  }
+
+  /**
+   * @param mixed $roleId
+   */
+  public function setRoleId($roleId) {
+    $this->roleId = $roleId;
+  }
 
   /**
    * @return mixed
@@ -79,6 +113,14 @@ class User{
    */
   public function setPassword($password) {
     $this->password = $password;
+  }
+
+  public function getRoles() {
+    // TODO: Implement getRoles() method.
+  }
+
+  public function eraseCredentials() {
+    // TODO: Implement eraseCredentials() method.
   }
 
 }

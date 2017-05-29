@@ -13,7 +13,7 @@ class LendeeController extends FOSRestController {
   /**
    * @Rest\Get("/api/lendees", name="lendees_get")
    */
-  public function lendeesAction(Request $request)
+  public function lendeesAction()
   {
     $lendees = $this->getDoctrine()->getRepository('AppBundle:Lendee')->findAll();
 

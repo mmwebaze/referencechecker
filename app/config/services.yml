@@ -10,3 +10,7 @@ services:
     app.refcheck:
       class: AppBundle\Service\RefCheckService
       arguments: []
+
+    app.jwt_token_authenticator:
+      class: AppBundle\Security\JwtAuthenticator
+      arguments: ['@doctrine.orm.entity_manager', '@lexik_jwt_authentication.encoder']

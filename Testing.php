@@ -5,7 +5,8 @@ $base_url = 'http://localhost:8000/api';
 $file_url_mapping = [
   'lendee.json' => $base_url.'/lendee',
   'lender.json' => $base_url.'/lender',
-  'lendeeHistory.json' => $base_url.'/lendeeHistory'
+  'lendeeHistory.json' => $base_url.'/lendeeHistory',
+  'user.json' => $base_url.'/user'
 ];
 $dummyDataFolder = [];
 
@@ -27,7 +28,7 @@ foreach ($file_url_mapping as $file => $url){
   $response = $client->post($url,[
     'body' => $dummyDataFolder[$file]
   ]);
-  echo json_encode($response);
+  echo json_encode($response->getBody());
 }
 
 //echo $response;
