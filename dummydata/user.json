@@ -1,6 +1,22 @@
 {
-  "username":"admin",
-  "password":"s3cr3ts",
-  "email":"admin@refchecker.com",
-  "roleId":"1"
+  "users":[
+    {
+      "username":"admin",
+      "password":"s3cr3ts",
+      "email":"admin@refchecker.com",
+      "roleId":"1",
+      "roles":[
+        "1","2","3"
+      ]
+    },
+    {
+      "username":"mwebz",
+      "password":"4g3t1t",
+      "email":"mwebz@refchecker.com",
+      "roleId":"1",
+      "roles":[
+        "1","2"
+      ]
+    }
+  ]
 }

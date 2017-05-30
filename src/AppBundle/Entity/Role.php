@@ -17,9 +17,14 @@ class Role {
    */
   protected $id;
   /**
-   * @ORM\Column(type="string", length=12)
+   * @ORM\Column(type="string", length=64)
    */
   protected $roleName;
+  /**
+   *
+   *
+   */
+  protected $appUser;
 
   /**
    * @return mixed

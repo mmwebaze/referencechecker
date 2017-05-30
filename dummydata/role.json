@@ -1,0 +1,7 @@
+{
+  "roles":[
+    "IS_AUTHENTICATED_ANONYMOUSLY",
+    "ROLE_USER",
+    "ROLE_API_USER"
+  ]
+}

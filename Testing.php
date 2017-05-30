@@ -6,6 +6,7 @@ $file_url_mapping = [
   'lendee.json' => $base_url.'/lendee',
   'lender.json' => $base_url.'/lender',
   'lendeeHistory.json' => $base_url.'/lendeeHistory',
+  'role.json' => $base_url.'/role',
   'user.json' => $base_url.'/user'
 ];
 $dummyDataFolder = [];

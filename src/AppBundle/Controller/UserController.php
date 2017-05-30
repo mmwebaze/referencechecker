@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\AppUser;
+use AppBundle\Entity\Role;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -29,17 +30,25 @@ class UserController extends FOSRestController{
   public function addUserAction(Request $request){
     $data = json_decode($request->getContent(), true);
     $encoder = $this->container->get('security.password_encoder');
+    foreach ($data['users'] as $key => $newUser){
+      $user = new AppUser();
+      $encoded = $encoder->encodePassword($user, $newUser['password']);
+      $user->setUsername($newUser['username']);
+      $user->setPassword($encoded);
+      $user->setEmail($newUser['email']);
+      $em = $this->getDoctrine()->getManager();
+      foreach ($newUser['roles'] as $configuredRole){
+        $role = $em->getRepository('AppBundle:Role')->find($configuredRole);
+        $user->setRoles($role);
+        /*$role = new Role();
+        $role->setRoleName($configuredRole);
+        $user->setRoles($role);*/
+        //$em->persist($role);
+      }
+      $em->persist($user);
+      $em->flush();
+    }
 
-    $user = new AppUser();
-    $encoded = $encoder->encodePassword($user, $data['password']);
-    $user->setUsername($data['username']);
-    $user->setPassword($encoded);
-    $user->setEmail($data['email']);
-    $user->setRoleId($data['roleId']);
-    //$user->setSalt($encoded);
-    $em = $this->getDoctrine()->getManager();
-    $em->persist($user);
-    $em->flush();
 
     return new View('User has been added ', Response::HTTP_OK);
   }
