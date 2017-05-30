@@ -16,7 +16,7 @@ class LenderController extends FOSRestController{
   /**
    * @Rest\Get("/api/lenders", name="lenders")
    */
-  public function lendersAction(){
+  public function lendersAction(Request $request){
     //$this->denyAccessUnlessGranted('ROLE_USER');
     $lenders = $this->getDoctrine()->getRepository('AppBundle:Lender')->findAll();
 
@@ -43,13 +43,19 @@ class LenderController extends FOSRestController{
    */
   public function addLenderAction(Request $request){
     $data = json_decode($request->getContent(), true);
-    $lender = new Lender();
-    $lender->setName($data['lenderName']);
-    $lender->setBankCode($data['bankCode']);
-    $em = $this->getDoctrine()->getManager();
-    $em->persist($lender);
-    $em->flush();
 
-    return new View('Lender has been added', Response::HTTP_OK);
+    foreach ($data['lenders'] as $newLender) {
+      $lender = new Lender();
+      $lender->setName($newLender['lenderName']);
+      $lender->setBankCode($newLender['bankCode']);
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($lender);
+      $em->flush();
+    }
+
+    if (sizeof($data['lenders'] > 1))
+      return new View('Bulk lenders have been added', Response::HTTP_OK);
+    else
+      return new View('Lender has been added', Response::HTTP_OK);
   }
 }

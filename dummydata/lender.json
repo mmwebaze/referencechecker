@@ -1,4 +1,12 @@
 {
-  "lenderName":"Bank of Africa",
-  "bankCode":"BOA"
+  "lenders":[
+    {
+      "lenderName":"Bank of Africa",
+      "bankCode":"BOA"
+    },
+    {
+      "lenderName":"Bank of Baroda",
+      "bankCode":"BOB"
+    }
+  ]
 }
