@@ -15,7 +15,6 @@
 /vendor/
 /web/bundles/
 .idea
-bin
 /var/jwt
 app/keys/private.pem
 app/keys/public.pem
